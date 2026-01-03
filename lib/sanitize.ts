@@ -37,16 +37,16 @@ export function sanitizeHtml(html: string): string {
  */
 export function sanitizePhoneNumber(phone: string): string | null {
   const cleaned = phone.replace(/\D/g, '');
-  
+
   // Philippines mobile number validation
   if (cleaned.length === 11 && cleaned.startsWith('09')) {
     return cleaned;
   }
-  
+
   if (cleaned.length === 12 && cleaned.startsWith('639')) {
-    return '0' + cleaned.substring(2);
+    return `0${cleaned.substring(2)}`;
   }
-  
+
   return null;
 }
 
@@ -58,11 +58,11 @@ export function sanitizePhoneNumber(phone: string): string | null {
 export function sanitizeEmail(email: string): string | null {
   const trimmed = email.trim().toLowerCase();
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  
+
   if (emailRegex.test(trimmed)) {
     return trimmed;
   }
-  
+
   return null;
 }
 

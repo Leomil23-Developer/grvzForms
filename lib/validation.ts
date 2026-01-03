@@ -37,7 +37,7 @@ export const registrationSchema = z.object({
   deliveryAddress: z
     .string()
     .max(200, 'Delivery address must not exceed 200 characters')
-    .optional()
+    .optional(),
     .transform((val) => val?.trim() || undefined),
 
   idPicture: z

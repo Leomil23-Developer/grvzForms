@@ -73,7 +73,9 @@ export async function uploadToImageKit(
       
       // Wait before retry (exponential backoff)
       if (attempt < retries) {
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+        await new Promise((resolve) => {
+          setTimeout(resolve, 2 ** attempt * 1000);
+        });
       }
     }
   }
