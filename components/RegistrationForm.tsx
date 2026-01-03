@@ -574,6 +574,7 @@ export default function RegistrationForm() {
                       setNeedsDelivery(!needsDelivery);
                       if (!needsDelivery === false) {
                         setValue('deliveryAddress', '');
+                        setValue('contactNumber', '');
                       }
                     }}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 ${
@@ -589,7 +590,24 @@ export default function RegistrationForm() {
                 </div>
 
                 {needsDelivery && (
-                  <div className="mt-4">
+                  <div className="mt-4 space-y-4">
+                    <FormField
+                      label="Your Contact Number"
+                      id="contactNumber"
+                      required={needsDelivery}
+                      error={errors.contactNumber?.message}
+                      hint="Philippines mobile number (e.g., 09171234567)"
+                    >
+                      <input
+                        {...register('contactNumber')}
+                        type="tel"
+                        id="contactNumber"
+                        className="w-full h-10 px-3 text-sm font-mono border border-slate-200 rounded-lg bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 disabled:bg-slate-50 disabled:opacity-60 transition-colors"
+                        placeholder="09171234567"
+                        disabled={isSubmitting}
+                      />
+                    </FormField>
+
                     <FormField
                       label="Delivery Address"
                       id="deliveryAddress"

@@ -34,6 +34,15 @@ export const registrationSchema = z.object({
       'Please enter a valid Philippines mobile number (e.g., 09171234567 or +639171234567)',
     ),
 
+  contactNumber: z
+    .string()
+    .regex(
+      /^(\+?63|0)9\d{9}$/,
+      'Please enter a valid Philippines mobile number (e.g., 09171234567 or +639171234567)',
+    )
+    .optional()
+    .or(z.literal('')),
+
   deliveryAddress: z
     .string()
     .max(200, 'Delivery address must not exceed 200 characters')
@@ -86,6 +95,13 @@ export const serverRegistrationSchema = z.object({
     .string()
     .regex(/^(\+?63|0)9\d{9}$/, 'Invalid Philippines mobile number')
     .trim(),
+  contactNumber: z
+    .string()
+    .regex(/^(\+?63|0)9\d{9}$/, 'Invalid Philippines mobile number')
+    .trim()
+    .optional()
+    .or(z.literal(''))
+    .transform((val) => val || undefined),
   deliveryAddress: z
     .string()
     .max(200, 'Delivery address must not exceed 200 characters')

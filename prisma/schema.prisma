@@ -17,6 +17,7 @@ model Registration {
   dateOfRegistration    DateTime
   emergencyContactName  String
   emergencyContactNumber String
+  contactNumber         String?
   deliveryAddress       String?
   idPictureUrl          String
   qrCodeUrl             String

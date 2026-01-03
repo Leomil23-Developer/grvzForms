@@ -12,6 +12,7 @@ interface Registration {
   dateOfRegistration: string;
   emergencyContactName: string;
   emergencyContactNumber: string;
+  contactNumber: string | null;
   deliveryAddress: string | null;
   idPictureUrl: string;
   qrCodeUrl: string;
@@ -414,6 +415,12 @@ QR Code URL: ${registration.qrCodeUrl}
                     <label className="block text-xs font-medium text-slate-500 mb-1">Contact Number</label>
                     <p className="text-sm font-mono text-slate-900">{selectedRegistration.emergencyContactNumber}</p>
                   </div>
+                  {selectedRegistration.contactNumber && (
+                    <div>
+                      <label className="block text-xs font-medium text-slate-500 mb-1">Personal Contact Number</label>
+                      <p className="text-sm font-mono text-slate-900">{selectedRegistration.contactNumber}</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
