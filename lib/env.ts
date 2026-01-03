@@ -49,8 +49,8 @@ export const env = {
   API_SECRET_KEY: string | undefined;
 };
 
-// Validate on import (only in Node.js environment)
-if (typeof window === 'undefined') {
+// Validate on import (only in Node.js environment, skip during build)
+if (typeof window === 'undefined' && process.env.NEXT_PHASE !== 'phase-production-build') {
   try {
     validateEnv();
   } catch (error) {
