@@ -35,6 +35,7 @@ git push -u origin main
 2. Click "Add New Project"
 3. Import your GitHub repository
 4. Vercel will auto-detect Next.js
+5. **IMPORTANT**: Set Package Manager to `pnpm` in Project Settings
 
 #### 3. Configure Environment Variables
 
@@ -47,12 +48,16 @@ IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
 API_SECRET_KEY=your_generated_secret_key
 NEXT_PUBLIC_APP_URL=https://your-app.vercel.app
+ADMIN_ACCESS_CODE=GRVZ2026
 ```
+
+**⚠️ Critical**: Make sure `DATABASE_URL` is set BEFORE deploying, as Prisma needs it during build.
 
 #### 4. Deploy
 
 Click "Deploy" and Vercel will:
-- Install dependencies
+- Install dependencies with pnpm
+- Generate Prisma Client (requires DATABASE_URL)
 - Run build
 - Deploy your application
 
