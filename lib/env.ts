@@ -3,14 +3,17 @@
  * Ensures all required environment variables are present
  */
 
+// During build, use empty strings as fallbacks to prevent build errors
+const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build';
+
 const requiredEnvVars = {
   // Database
-  DATABASE_URL: process.env.DATABASE_URL,
+  DATABASE_URL: process.env.DATABASE_URL || (isBuildTime ? '' : undefined),
   
   // ImageKit
-  NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-  IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
-  NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
+  NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || (isBuildTime ? '' : undefined),
+  IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY || (isBuildTime ? '' : undefined),
+  NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || (isBuildTime ? '' : undefined),
 } as const;
 
 const optionalEnvVars = {

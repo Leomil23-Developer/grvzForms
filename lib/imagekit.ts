@@ -1,21 +1,25 @@
 import ImageKit from 'imagekit';
 
-if (!process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY) {
-  throw new Error('NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY is not defined');
-}
+const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build';
 
-if (!process.env.IMAGEKIT_PRIVATE_KEY) {
-  throw new Error('IMAGEKIT_PRIVATE_KEY is not defined');
-}
+if (!isBuildTime) {
+  if (!process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY) {
+    throw new Error('NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY is not defined');
+  }
 
-if (!process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT) {
-  throw new Error('NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT is not defined');
+  if (!process.env.IMAGEKIT_PRIVATE_KEY) {
+    throw new Error('IMAGEKIT_PRIVATE_KEY is not defined');
+  }
+
+  if (!process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT) {
+    throw new Error('NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT is not defined');
+  }
 }
 
 export const imagekit = new ImageKit({
-  publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
+  publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY || 'build-time-placeholder',
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY || 'build-time-placeholder',
+  urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || 'https://placeholder.imagekit.io',
 });
 
 export interface UploadResponse {
