@@ -13,7 +13,7 @@ export async function GET() {
           database: 'disconnected',
           timestamp: new Date().toISOString(),
         },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
@@ -26,17 +26,16 @@ export async function GET() {
         uptime: process.uptime(),
         environment: process.env.NODE_ENV,
       },
-      { status: 200 }
+      { status: 200 },
     );
-  } catch (error) {
-    console.error('Health check failed:', error);
+  } catch {
     return NextResponse.json(
       {
         status: 'unhealthy',
         error: 'Health check failed',
         timestamp: new Date().toISOString(),
       },
-      { status: 503 }
+      { status: 503 },
     );
   }
 }

@@ -43,14 +43,13 @@ export async function GET(request: NextRequest) {
       page,
       totalPages: Math.ceil(total / limit),
     });
-  } catch (error) {
-    console.error('Error fetching registrations:', error);
+  } catch {
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to fetch registrations' 
+      {
+        success: false,
+        error: 'Failed to fetch registrations',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -22,16 +22,16 @@ const optionalEnvVars = {
 export function validateEnv() {
   const missing: string[] = [];
 
-  for (const [key, value] of Object.entries(requiredEnvVars)) {
+  Object.entries(requiredEnvVars).forEach(([key, value]) => {
     if (!value) {
       missing.push(key);
     }
-  }
+  });
 
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variables:\n${missing.map((key) => `  - ${key}`).join('\n')}\n\n` +
-      'Please check your .env file or environment configuration.'
+      'Please check your .env file or environment configuration.',
     );
   }
 }
@@ -54,12 +54,8 @@ if (typeof window === 'undefined') {
   try {
     validateEnv();
   } catch (error) {
-    if (error instanceof Error) {
-      console.error('❌ Environment validation failed:');
-      console.error(error.message);
-      if (process.env.NODE_ENV !== 'development') {
-        process.exit(1);
-      }
+    if (error instanceof Error && process.env.NODE_ENV !== 'development') {
+      process.exit(1);
     }
   }
 }

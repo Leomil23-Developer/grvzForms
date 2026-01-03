@@ -19,6 +19,21 @@
     "no-trailing-spaces": "warn",
     "import/order": "warn",
     "no-bitwise": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "arrow-body-style": "warn",
+    "@typescript-eslint/no-shadow": "warn",
+    "no-nested-ternary": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/control-has-associated-label": "warn",
+    "react/self-closing-comp": "warn",
+    "react/jsx-first-prop-new-line": "warn",
+    "react/jsx-indent-props": "warn",
+    "react/jsx-closing-bracket-location": "warn",
+    "jsx-a11y/no-autofocus": "warn",
+    "react/require-default-props": "warn",
+    "object-curly-newline": "warn",
+    "max-len": ["warn", { "code": 120 }]
   }
 }

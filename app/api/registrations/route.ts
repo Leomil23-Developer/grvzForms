@@ -30,8 +30,10 @@ export async function POST(request: NextRequest) {
     const yamahaId = sanitizeYamahaId((formData.get('yamahaId') as string) || '');
     const dateOfRegistration = formData.get('dateOfRegistration') as string;
     const emergencyContactName = sanitizeName((formData.get('emergencyContactName') as string) || '');
-    const emergencyContactNumber = sanitizePhoneNumber((formData.get('emergencyContactNumber') as string) || '');
-    const deliveryAddress = formData.get('deliveryAddress') 
+    const emergencyContactNumber = sanitizePhoneNumber(
+      (formData.get('emergencyContactNumber') as string) || '',
+    );
+    const deliveryAddress = formData.get('deliveryAddress')
       ? sanitizeAddress(formData.get('deliveryAddress') as string)
       : null;
     const idPicture = formData.get('idPicture') as File;
@@ -122,7 +124,7 @@ export async function POST(request: NextRequest) {
       201,
     );
   } catch (error) {
-    console.error('Registration error:', error);
+    // Registration error
 
     // Handle Zod validation errors
     if (error && typeof error === 'object' && 'errors' in error) {

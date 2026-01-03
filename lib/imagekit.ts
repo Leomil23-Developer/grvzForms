@@ -44,9 +44,7 @@ export async function uploadToImageKit(
   folder: string = 'registrations',
   retries: number = 3,
 ): Promise<UploadResponse> {
-  let lastError: Error | null = null;
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
+  const attemptUpload = async (attempt: number): Promise<UploadResponse> => {
     try {
       const result = await imagekit.upload({
         file,
@@ -68,19 +66,22 @@ export async function uploadToImageKit(
         fileType: result.fileType,
       };
     } catch (error) {
-      lastError = error instanceof Error ? error : new Error('Unknown error during upload');
-      console.error(`ImageKit upload attempt ${attempt} failed:`, error);
-      
-      // Wait before retry (exponential backoff)
       if (attempt < retries) {
         await new Promise((resolve) => {
           setTimeout(resolve, 2 ** attempt * 1000);
         });
+        return attemptUpload(attempt + 1);
       }
+      throw error instanceof Error ? error : new Error('Unknown error during upload');
     }
-  }
+  };
 
-  throw new Error(`Failed to upload image to ImageKit after ${retries} attempts: ${lastError?.message}`);
+  try {
+    return await attemptUpload(1);
+  } catch (error) {
+    const lastError = error instanceof Error ? error : new Error('Unknown error');
+    throw new Error(`Failed to upload image to ImageKit after ${retries} attempts: ${lastError.message}`);
+  }
 }
 
 /**

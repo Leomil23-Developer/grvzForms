@@ -31,7 +31,7 @@ export const registrationSchema = z.object({
     .string()
     .regex(
       /^(\+?63|0)9\d{9}$/,
-      'Please enter a valid Philippines mobile number (e.g., 09171234567 or +639171234567)'
+      'Please enter a valid Philippines mobile number (e.g., 09171234567 or +639171234567)',
     ),
 
   deliveryAddress: z
