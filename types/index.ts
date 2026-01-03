@@ -31,6 +31,8 @@ export interface CreateRegistrationData {
   dateOfRegistration: Date | string;
   emergencyContactName: string;
   emergencyContactNumber: string;
+  contactNumber?: string;
+  deliveryAddress?: string;
   idPictureUrl: string;
   qrCodeUrl: string;
 }

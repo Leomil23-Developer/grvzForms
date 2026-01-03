@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Registration {
@@ -17,6 +16,7 @@ model Registration {
   dateOfRegistration    DateTime
   emergencyContactName  String
   emergencyContactNumber String
+  contactNumber         String?
   deliveryAddress       String?
   idPictureUrl          String
   qrCodeUrl             String
