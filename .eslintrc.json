@@ -1,0 +1,24 @@
+{
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "linebreak-style": "off",
+    "no-console": "warn",
+    "no-alert": "warn",
+    "react/button-has-type": "warn",
+    "react/no-unescaped-entities": "warn",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "@next/next/no-img-element": "warn",
+    "no-trailing-spaces": "warn",
+    "import/order": "warn",
+    "no-bitwise": "off",
+    "operator-linebreak": "off"
+  }
+}
